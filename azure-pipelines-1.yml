@@ -1,0 +1,21 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+trigger:
+- '*'
+pr:
+-'*'
+
+pool:
+  vmImage: ubuntu-latest
+
+steps:
+- script: |
+  # Install Trufflehog
+  pip install trufflehog
+  # Run Trufflehog scan
+  trucclehog --regex --entropy 3 https://github.com/alashro/webapp
+
+  displayName: 'Run Trufflehog Scan'
